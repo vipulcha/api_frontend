@@ -12,7 +12,7 @@ export function Helio() {
   useEffect(() => {
     const fetchHelioPosts = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/helio-entries");
+        const response = await axios.get("https://api-backend-2uhu.onrender.com/api/helio-entries");
         setHelioPosts(response.data);
       } catch (error) {
         console.log(error);
@@ -24,7 +24,7 @@ export function Helio() {
 
   const handleDelete = async (postId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/helio-entries/${postId}`);
+      await axios.delete(`https://api-backend-2uhu.onrender.com/api/helio-entries/${postId}`);
       setHelioPosts((prevPosts) => prevPosts.filter((post) => post._id !== postId));
     } catch (error) {
       console.log(error);
@@ -33,7 +33,7 @@ export function Helio() {
 
   const toggleComments = async (postId) => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/helio-entries/${postId}/comments`);
+      const response = await axios.get(`https://api-backend-2uhu.onrender.com/api/helio-entries/${postId}/comments`);
       const fetchedComments = response.data;
 
       setComments({
@@ -52,7 +52,7 @@ export function Helio() {
 
   const handleAddComment = async (postId, text) => {
     try {
-      await axios.post(`http://localhost:5000/api/helio-entries/${postId}/comments`, { text });   
+      await axios.post(`https://api-backend-2uhu.onrender.com/api/helio-entries/${postId}/comments`, { text });   
       toggleComments(postId);
       setCommentText("");
     } catch (error) {
@@ -62,7 +62,7 @@ export function Helio() {
 
   const handleDeleteComment = async (postId,commentId) =>{
     try{
-        const url = `http://localhost:5000/api/helio-entries/${postId}/comments/${commentId}`;
+        const url = `https://api-backend-2uhu.onrender.com/api/helio-entries/${postId}/comments/${commentId}`;
         console.log('Deleting comment with URL:', url);
         await axios.delete(url);
         toggleComments(postId);
